@@ -1,0 +1,130 @@
+<!-- Bootstrap CSS -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"
+/>
+
+<!-- DataTables CSS -->
+<link
+  rel="stylesheet"
+  href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"
+/>
+
+<!-- Responsive DataTables CSS -->
+<link
+  rel="stylesheet"
+  href="https://cdn.datatables.net/responsive/2.2.10/css/responsive.bootstrap4.min.css"
+/>
+
+<!-- jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+  /* Outer container */
+  .outer-container {
+    width: 85%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  /* Table container styling */
+  .table-container {
+    width: 100%;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  #feedbackTable {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80% !important; /* Reducing width for better spacing on sides */
+    border-collapse: separate !important;
+    border-spacing: 10px !important; /* Introducing space between cells */
+  }
+
+  table {
+    width: 100%; /* Make sure table takes the full width of its container */
+    border-collapse: collapse; /* Removes spacing between table cells */
+  }
+
+  /* To center the table both horizontally and vertically */
+  body {
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    height: 100vh; /* Takes full viewport height */
+  }
+
+  /* Ensure content within cells is wrapped properly */
+  #feedbackTable tbody td {
+    word-wrap: break-word; /* For older browsers */
+    word-break: break-word; /* Break words */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* End with ... if content doesn't fit */
+    max-height: 100px; /* Optionally limit cell height */
+  }
+
+  .dataTables_wrapper {
+    overflow: hidden !important;
+  }
+
+  th,
+  td {
+    width: 33.3%; /* Each column takes half the table width */
+    padding: 8px; /* Padding for cell content */
+    text-align: left; /* Align text to the left */
+    border: 1px solid #ddd; /* Optional border for cells */
+  }
+</style>
+
+<div class="outer-container">
+  <div class="table-container">
+    <table id="feedbackTable" class="display nowrap" style="width: 100%">
+      <thead class="thead-dark">
+        <tr>
+          <th>Problem</th>
+          <th>Description</th>
+          <th>Solution</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in feedbacks %}
+        <tr>
+          <td>{{ item.problem }}</td>
+          <td>{{ item.description }}</td>
+          <td>{{ item.solution }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- DataTables script -->
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<!-- DataTables Bootstrap integration -->
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
+<!-- Responsive DataTables -->
+<script src="https://cdn.datatables.net/responsive/2.2.10/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.10/js/responsive.bootstrap4.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $("#feedbackTable").DataTable({
+      scrollX: false,
+      scrollY: false,
+      scrollCollapse: true,
+      responsive: {
+        details: {
+          type: "column",
+          target: "tr",
+        },
+      },
+    });
+  });
+</script>
